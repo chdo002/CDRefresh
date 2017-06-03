@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "UITableView+CDPullRefresh.h"
+#import "UIScrollView+CDPullRefresh.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *table;

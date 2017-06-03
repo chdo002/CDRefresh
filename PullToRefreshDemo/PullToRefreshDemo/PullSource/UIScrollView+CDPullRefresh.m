@@ -6,29 +6,29 @@
 //  Copyright © 2017年 chdo. All rights reserved.
 //
 
-#import "UITableView+CRMPullRefresh.h"
-#import "CRMRefreshView.h"
+#import "UIScrollView+CDPullRefresh.h"
+#import "CDRefreshView.h"
 #import "objc/runtime.h"
 
-@implementation UITableView (CRMPullRefresh)
+@implementation UIScrollView (CDPullRefresh)
 
 static const char refreshKey = '\0';
 
 -(void)startRefresh{
     
-    CRMRefreshView *refresh = objc_getAssociatedObject(self, &refreshKey);
+    CDRefreshView *refresh = objc_getAssociatedObject(self, &refreshKey);
     [refresh startRefresh];
 }
 
 -(void)stopRefreshing{
     
-    CRMRefreshView *refresh = objc_getAssociatedObject(self, &refreshKey);
+    CDRefreshView *refresh = objc_getAssociatedObject(self, &refreshKey);
     [refresh stopRefreshing];
 }
 
 -(void)addPullRefresh:(void (^)())refreshAction {
     
-    CRMRefreshView *refresh = [[CRMRefreshView alloc] init];
+    CDRefreshView *refresh = [[CDRefreshView alloc] init];
     [self addSubview:refresh];
     
     [refresh setPullAction:refreshAction];

@@ -6,11 +6,11 @@
 //  Copyright © 2017年 chdo. All rights reserved.
 //
 
-#import "UITableView+CDPullRefresh.h"
+#import "UIScrollView+CDPullRefresh.h"
 #import "CDRefreshView.h"
 #import "objc/runtime.h"
 
-@implementation UITableView (CDPullRefresh)
+@implementation UIScrollView (CDPullRefresh)
 
 static const char refreshKey = '\0';
 

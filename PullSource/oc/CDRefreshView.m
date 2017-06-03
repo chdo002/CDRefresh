@@ -6,15 +6,19 @@
 //  Copyright © 2017年 chdo. All rights reserved.
 //
 
-#import "CRMRefreshView.h"
+#import "CDRefreshView.h"
+
+
+#define ScreenW [[UIScreen mainScreen] bounds].size.width
+#define ScreenH [[UIScreen mainScreen] bounds].size.height
 
 typedef enum : NSUInteger {
-    CRMRefreshStateNormal,      // 普通
-    CRMRefreshStatePulling,     // 拉动中
-    CRMRefreshStateRefreshing   // 刷新中
-} CRMRefreshState;
+    CDRefreshStateNormal,      // 普通
+    CDRefreshStatePulling,     // 拉动中
+    CDRefreshStateRefreshing   // 刷新中
+} CDRefreshState;
 
-@interface CRMRefreshView()
+@interface CDRefreshView()
 {
     UIScrollView *scroll;
     
@@ -25,11 +29,11 @@ typedef enum : NSUInteger {
     UIActivityIndicatorView *loading;
 }
 
-@property (nonatomic, assign) CRMRefreshState state;
+@property (nonatomic, assign) CDRefreshState state;
 
 @end
 
-@implementation CRMRefreshView
+@implementation CDRefreshView
 
 -(instancetype)init{
     self = [super init];
@@ -38,7 +42,7 @@ typedef enum : NSUInteger {
     [self setFrame:CGRectMake(0, -pullMark, ScreenW, pullMark)];
     [self setBackgroundColor:[UIColor clearColor]];
     
-    _state = CRMRefreshStateNormal;
+    _state = CDRefreshStateNormal;
 
     loading = [[UIActivityIndicatorView alloc] initWithFrame:self.bounds];
     [loading setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
@@ -48,7 +52,7 @@ typedef enum : NSUInteger {
     return self;
 }
 
--(void)setState:(CRMRefreshState)state {
+-(void)setState:(CDRefreshState)state {
     if (_state != state) {
         _state = state;
     } else {
@@ -56,13 +60,13 @@ typedef enum : NSUInteger {
     }
     
     switch (state) {
-        case CRMRefreshStateNormal:
+        case CDRefreshStateNormal:
             [self toogleIntoNoramlState];
             break;
-        case CRMRefreshStatePulling:
+        case CDRefreshStatePulling:
             // 此处还没做下拉进度回调
             break;
-        case CRMRefreshStateRefreshing:
+        case CDRefreshStateRefreshing:
             [self toogleIntoRefreshState];
             break;
     }
@@ -83,21 +87,21 @@ typedef enum : NSUInteger {
     if ([keyPath isEqualToString:@"contentOffset"]) {
         
         // 如果是在刷新中则返回
-        if (_state == CRMRefreshStateRefreshing) {
+        if (_state == CDRefreshStateRefreshing) {
             return;
         }
         
         CGPoint offset = [change[NSKeyValueChangeNewKey] CGPointValue];
-        // 在拖动状态下只有CRMRefreshStatePulling
+        // 在拖动状态下只有CDRefreshStatePulling
         if (scroll.isDragging) {
-            self.state = CRMRefreshStatePulling;
+            self.state = CDRefreshStatePulling;
         // 在开始减速状态下，若超过标准值，则触发刷新事件
         } else if (scroll.isDecelerating) {
             if (-offset.y > pullMark) {
                 //触发刷新事件
-                self.state = CRMRefreshStateRefreshing;
+                self.state = CDRefreshStateRefreshing;
             } else {
-                self.state = CRMRefreshStateNormal;
+                self.state = CDRefreshStateNormal;
             }
         }
     } else {
@@ -107,11 +111,11 @@ typedef enum : NSUInteger {
 
 
 -(void)startRefresh {
-    self.state = CRMRefreshStateRefreshing;
+    self.state = CDRefreshStateRefreshing;
 }
 
 -(void)stopRefreshing{
-    self.state = CRMRefreshStateNormal;
+    self.state = CDRefreshStateNormal;
     [self stopAnimation];
 }
 

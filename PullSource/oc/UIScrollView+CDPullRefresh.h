@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITableView (CRMPullRefresh)
+@interface UIScrollView (CDPullRefresh)
 
 -(void)addPullRefresh:(void(^)())refreshAction;
 

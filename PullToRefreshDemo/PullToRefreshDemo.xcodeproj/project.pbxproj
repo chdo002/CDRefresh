@@ -16,7 +16,7 @@
 		E9759A2F1EE269CE0002F403 /* PullToRefreshDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9759A2E1EE269CE0002F403 /* PullToRefreshDemoTests.m */; };
 		E9759A3A1EE269CE0002F403 /* PullToRefreshDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9759A391EE269CE0002F403 /* PullToRefreshDemoUITests.m */; };
 		E9759A4C1EE26ACB0002F403 /* CDRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9759A491EE26ACB0002F403 /* CDRefreshView.m */; };
-		E9759A4D1EE26ACB0002F403 /* UITableView+CDPullRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E9759A4B1EE26ACB0002F403 /* UITableView+CDPullRefresh.m */; };
+		E9759A4D1EE26ACB0002F403 /* UIScrollView+CDPullRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E9759A4B1EE26ACB0002F403 /* UIScrollView+CDPullRefresh.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +55,8 @@
 		E9759A3B1EE269CE0002F403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9759A481EE26ACB0002F403 /* CDRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRefreshView.h; sourceTree = "<group>"; };
 		E9759A491EE26ACB0002F403 /* CDRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRefreshView.m; sourceTree = "<group>"; };
-		E9759A4A1EE26ACB0002F403 /* UITableView+CDPullRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CDPullRefresh.h"; sourceTree = "<group>"; };
-		E9759A4B1EE26ACB0002F403 /* UITableView+CDPullRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CDPullRefresh.m"; sourceTree = "<group>"; };
+		E9759A4A1EE26ACB0002F403 /* UIScrollView+CDPullRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+CDPullRefresh.h"; sourceTree = "<group>"; };
+		E9759A4B1EE26ACB0002F403 /* UIScrollView+CDPullRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+CDPullRefresh.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +152,8 @@
 			children = (
 				E9759A481EE26ACB0002F403 /* CDRefreshView.h */,
 				E9759A491EE26ACB0002F403 /* CDRefreshView.m */,
-				E9759A4A1EE26ACB0002F403 /* UITableView+CDPullRefresh.h */,
-				E9759A4B1EE26ACB0002F403 /* UITableView+CDPullRefresh.m */,
+				E9759A4A1EE26ACB0002F403 /* UIScrollView+CDPullRefresh.h */,
+				E9759A4B1EE26ACB0002F403 /* UIScrollView+CDPullRefresh.m */,
 			);
 			path = PullSource;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9759A4D1EE26ACB0002F403 /* UITableView+CDPullRefresh.m in Sources */,
+				E9759A4D1EE26ACB0002F403 /* UIScrollView+CDPullRefresh.m in Sources */,
 				E9759A1C1EE269CE0002F403 /* ViewController.m in Sources */,
 				E9759A191EE269CE0002F403 /* AppDelegate.m in Sources */,
 				E9759A161EE269CE0002F403 /* main.m in Sources */,
@@ -536,6 +536,7 @@
 				E9759A401EE269CE0002F403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9759A411EE269CE0002F403 /* Build configuration list for PBXNativeTarget "PullToRefreshDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +545,7 @@
 				E9759A431EE269CE0002F403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9759A441EE269CE0002F403 /* Build configuration list for PBXNativeTarget "PullToRefreshDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +554,7 @@
 				E9759A461EE269CE0002F403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

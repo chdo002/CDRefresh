@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CRMRefreshView : UIView
+@interface CDRefreshView : UIView
 
 @property(nonatomic, copy) void(^pullAction)();
 

@@ -10,7 +10,7 @@
 import UIKit
 
 fileprivate var RefreshViewKey = "RefreshViewKey"
-extension UITableView {
+extension UIScrollView {
     func startRefresh() {
         
         if let ref = objc_getAssociatedObject(self, &RefreshViewKey) as? CDRefreshView {
