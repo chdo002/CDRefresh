@@ -1,2 +1,2 @@
 # CDRefresh
-a very simple Refresh
+a very simple Pull2Refresh
