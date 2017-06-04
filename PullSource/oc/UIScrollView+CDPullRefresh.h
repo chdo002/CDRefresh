@@ -11,7 +11,7 @@
 @interface UIScrollView (CDPullRefresh)
 
 -(void)addPullRefresh:(void(^)())refreshAction;
-
+-(void)addPullRefresh:(void (^)())refreshAction progressHandler: (void (^)(UIView *refView, CGFloat per))pullingAction;
 -(void)startRefresh;
 -(void)stopRefreshing;
 

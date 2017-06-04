@@ -25,14 +25,20 @@ extension UIScrollView {
     }
     
     
-    func addPullRefresh(_ refreshHandler:@escaping () -> Void) {
+    func addPullRefresh(_ refreshHandler:@escaping () -> Void, pullingHandler: ((_ refreshView: UIView, _ percent: CGFloat) -> Void)? = nil) {
+        
+        if let ref = objc_getAssociatedObject(self, &RefreshViewKey) as? CDRefreshView {
+            ref.removeFromSuperview()
+            objc_setAssociatedObject(self, &RefreshViewKey, nil, .OBJC_ASSOCIATION_ASSIGN)
+        }
         
         let ref = CDRefreshView()
         addSubview(ref)
-        ref.pullAction = refreshHandler
+        
+        ref.refreshAction = refreshHandler
+        ref.pullingHandler = pullingHandler
+        
         objc_setAssociatedObject(self, &RefreshViewKey, ref, .OBJC_ASSOCIATION_ASSIGN)
-        
-        
     }
 }
 
@@ -45,37 +51,60 @@ private class CDRefreshView: UIView {
 
     enum CDRefreshState {
         case normal
-        case pulling
+        case pulling(percent: CGFloat)
         case refreshing
     }
     
     
     /****************************************/
     
-    var scroll: UIScrollView?
+    weak var scroll: UIScrollView?
     let pullMark: CGFloat = 60;
     
     var originInset: UIEdgeInsets?
     var originOffset: CGPoint?
     
-    
-    
     lazy var loading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-    var pullAction: (()-> Void)?
+    var refreshAction: (()-> Void)?
+    var pullingHandler: ((_ refreshView: UIView, _ percent: CGFloat)-> Void)?
     
     var state : CDRefreshState = .normal {
         
         didSet{
-            
-            if oldValue != state {
-                switch state {
-                case .normal:
-                    toogleIntoNoramlState()
-                case .pulling:
-                    print(123)
-                case .refreshing:
+            switch state {
+            case .pulling(percent: let per):
+                // 只有oldValue是normal或者pulling态才会进入此处
+                if let handler = self.pullingHandler {
+                    handler(self, per)
+                } else {
+                    self.alpha = pow(per, 2.5) // 非线性的透明度变化好看一点
+                }
+            case .normal:
+                // 只有oldValue是refreshing或者pulling态才会进入此处
+//                switch oldValue {
+//                case .pulling(percent: _):
+//                    toogleIntoNoramlState()
+//                case .refreshing:
+                    if (scroll?.contentOffset.y)! > pullMark {
+                        UIView.animate(withDuration: 0.25, animations: {
+                            self.scroll?.contentInset = self.originInset!
+                            self.alpha = 0
+                        }) { (bol) in
+                        }
+                    } else {
+                        toogleIntoNoramlState()
+                    }
+//                default:
+//                    return
+//                }
+            case .refreshing:
+                // 只有oldValue是normal或者pulling态才会进入此处
+                switch oldValue {
+                case .normal, .pulling(percent: _):
                     toogleIntoRefreshState()
+                default:
+                    return
                 }
             }
         }
@@ -112,6 +141,7 @@ private class CDRefreshView: UIView {
     
     func stopRefresh() {
         self.state = .normal
+        self.stopAnimation()
     }
     
     
@@ -119,6 +149,7 @@ private class CDRefreshView: UIView {
         UIView.animate(withDuration: 0.25, animations: { 
             self.scroll?.contentInset = self.originInset!
             self.scroll?.contentOffset = self.originOffset!
+            self.alpha = 0
         }) { (bol) in
             if bol {
                 
@@ -137,9 +168,10 @@ private class CDRefreshView: UIView {
                     self.scroll?.contentOffset = offSet
                 }
             }
+            self.alpha = 1
         }) { (bol) in
             if bol {
-                self.pullAction?()
+                self.refreshAction?()
                 self.startAnimation()
             }
         }
@@ -155,22 +187,26 @@ private class CDRefreshView: UIView {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if keyPath == "contentOffset" {
-            
-            guard state != .refreshing  else { return }
-            
-            if  let offset = change?[.newKey] as? CGPoint,
-                let scrollView = self.scroll
-            {
-                if scrollView.isDragging {
-                    self.state = .pulling
-                } else if scrollView.isDecelerating {
-                    if -offset.y > pullMark {
-                        self.state = .refreshing
-                    } else {
-                        self.state = .normal
+        if keyPath == "contentOffset" && context == &obsesrver {
+            switch state {
+            case .normal , .pulling(percent: _):
+                if  let offset = change?[.newKey] as? CGPoint,
+                    let scrollView = self.scroll
+                {
+                    if scrollView.isDragging {
+                        
+                        var per: CGFloat =  scrollView.contentOffset.y / pullMark
+                        per = min(per, 0)
+                        per = max(per, -1)
+                        state = .pulling(percent: -per)
+                    } else if scrollView.isDecelerating {
+                        if -offset.y > pullMark {
+                            state = .refreshing
+                        }
                     }
                 }
+            default:
+                return
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -179,5 +215,9 @@ private class CDRefreshView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        scroll?.removeObserver(self, forKeyPath: "contentOffset")
     }
 }

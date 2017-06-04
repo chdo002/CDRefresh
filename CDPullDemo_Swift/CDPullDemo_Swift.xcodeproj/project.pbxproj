@@ -14,7 +14,7 @@
 		E9759A651EE26E690002F403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9759A631EE26E690002F403 /* LaunchScreen.storyboard */; };
 		E9759A701EE26E6A0002F403 /* CDPullDemo_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9759A6F1EE26E6A0002F403 /* CDPullDemo_SwiftTests.swift */; };
 		E9759A7B1EE26E6A0002F403 /* CDPullDemo_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9759A7A1EE26E6A0002F403 /* CDPullDemo_SwiftUITests.swift */; };
-		E9759A8A1EE26F990002F403 /* CDPull2Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9759A891EE26F990002F403 /* CDPull2Refresh.swift */; };
+		E97CDDC41EE3FB6F00077D5F /* CDPull2Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CDDC31EE3FB6F00077D5F /* CDPull2Refresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,7 @@
 		E9759A761EE26E6A0002F403 /* CDPullDemo_SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CDPullDemo_SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9759A7A1EE26E6A0002F403 /* CDPullDemo_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDPullDemo_SwiftUITests.swift; sourceTree = "<group>"; };
 		E9759A7C1EE26E6A0002F403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9759A891EE26F990002F403 /* CDPull2Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDPull2Refresh.swift; sourceTree = "<group>"; };
+		E97CDDC31EE3FB6F00077D5F /* CDPull2Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDPull2Refresh.swift; path = ../../PullSource/swift/CDPull2Refresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +101,7 @@
 			children = (
 				E9759A5A1EE26E690002F403 /* AppDelegate.swift */,
 				E9759A5C1EE26E690002F403 /* ViewController.swift */,
-				E9759A881EE26F7D0002F403 /* pull */,
+				E97CDDC21EE3FB5A00077D5F /* pull */,
 				E9759A5E1EE26E690002F403 /* Main.storyboard */,
 				E9759A611EE26E690002F403 /* Assets.xcassets */,
 				E9759A631EE26E690002F403 /* LaunchScreen.storyboard */,
@@ -128,12 +128,12 @@
 			path = CDPullDemo_SwiftUITests;
 			sourceTree = "<group>";
 		};
-		E9759A881EE26F7D0002F403 /* pull */ = {
+		E97CDDC21EE3FB5A00077D5F /* pull */ = {
 			isa = PBXGroup;
 			children = (
-				E9759A891EE26F990002F403 /* CDPull2Refresh.swift */,
+				E97CDDC31EE3FB6F00077D5F /* CDPull2Refresh.swift */,
 			);
-			path = pull;
+			name = pull;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,7 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9759A8A1EE26F990002F403 /* CDPull2Refresh.swift in Sources */,
+				E97CDDC41EE3FB6F00077D5F /* CDPull2Refresh.swift in Sources */,
 				E9759A5D1EE26E690002F403 /* ViewController.swift in Sources */,
 				E9759A5B1EE26E690002F403 /* AppDelegate.swift in Sources */,
 			);
