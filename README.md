@@ -1,4 +1,5 @@
 # CDRefresh
 a very simple Pull2Refresh
 
-- [ ] pulled action block 
+- [x] pulled action block 
+- [x] pulled action with parameter block
