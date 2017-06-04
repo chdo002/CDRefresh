@@ -27,9 +27,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGh-ya-QUS">
-                                <rect key="frame" x="236" y="21" width="77" height="53"/>
+                                <rect key="frame" x="197" y="21" width="178" height="53"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="77" id="VnL-ai-eF5"/>
+                                    <constraint firstAttribute="width" constant="178" id="VnL-ai-eF5"/>
                                     <constraint firstAttribute="height" constant="53" id="hOn-Sp-eew"/>
                                 </constraints>
                                 <state key="normal" title="stop"/>
@@ -38,10 +38,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJe-bW-Z9R">
-                                <rect key="frame" x="44" y="21" width="83" height="53"/>
+                                <rect key="frame" x="0.0" y="21" width="189" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="htV-jS-RNh"/>
-                                    <constraint firstAttribute="width" constant="83" id="qle-Hc-gGF"/>
+                                    <constraint firstAttribute="width" constant="189" id="qle-Hc-gGF"/>
                                 </constraints>
                                 <state key="normal" title="start"/>
                                 <connections>
@@ -52,11 +52,11 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Vli-di-8As" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="AIt-Jc-sBd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nGh-ya-QUS" secondAttribute="trailing" constant="46" id="F9c-59-z3y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nGh-ya-QUS" secondAttribute="trailing" constant="-16" id="F9c-59-z3y"/>
                             <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="nGh-ya-QUS" secondAttribute="bottom" constant="2" id="VYp-TW-jCk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vli-di-8As" secondAttribute="bottom" id="iSc-4l-7Kc"/>
                             <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="oJe-bW-Z9R" secondAttribute="bottom" constant="2" id="lGW-Z2-c8Z"/>
-                            <constraint firstItem="oJe-bW-Z9R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="28" id="mUf-D1-qVQ"/>
+                            <constraint firstItem="oJe-bW-Z9R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="mUf-D1-qVQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vli-di-8As" secondAttribute="trailing" constant="-16" id="oYo-pY-IEs"/>
                             <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="56" id="vpr-h9-r2l"/>
                         </constraints>

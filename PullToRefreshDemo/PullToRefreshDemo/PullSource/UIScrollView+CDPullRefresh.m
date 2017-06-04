@@ -40,7 +40,7 @@ static NSString *refreshKey = @"refreshKey";
     
 }
 
--(void)addPullRefresh:(void (^)())refreshAction and: (void (^)(UIView *refView, CGFloat per))pullingAction {
+-(void)addPullRefresh:(void (^)())refreshAction progressHandler: (void (^)(UIView *refView, CGFloat per))pullingAction {
     
     CDRefreshView *refresh = objc_getAssociatedObject(self, &refreshKey);
     if(!refresh){

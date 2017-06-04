@@ -9,7 +9,10 @@
 #import "ViewController.h"
 #import "UIScrollView+CDPullRefresh.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDataSource>
+{
+    int rowNumber;
+}
 @property (weak, nonatomic) IBOutlet UITableView *table;
 
 @end
@@ -19,19 +22,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _table.dataSource = self;
+    
+    rowNumber = 1;
     
     [self.table addPullRefresh:^{
         NSLog(@"pulled");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            NSLog(@"trigged");
+            rowNumber++;
+            [self.table reloadData];
+            [self.table stopRefreshing];
+        });
     }];
-    
-    [self.table addPullRefresh:^{
-        NSLog(@"pulled2");
-    } and:^(UIView *refView, CGFloat per) {
-        [refView setAlpha:pow(per, 4)];
-    }];
-    
-    
 }
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return rowNumber;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    [cell.textLabel setText: [NSString stringWithFormat:@"--%ld", (long)indexPath.row]];
+    return cell;
+}
+
 
 
 - (IBAction)startRefresh:(id)sender {
