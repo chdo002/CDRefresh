@@ -10,7 +10,8 @@
 
 @interface CDRefreshView : UIView
 
-@property(nonatomic, copy) void(^pullAction)();
+@property(nonatomic, copy) void(^refreshAction)();
+@property(nonatomic, copy) void(^pullAction)(UIView *refView, CGFloat per);
 
 -(void)startRefresh;
 -(void)stopRefreshing;

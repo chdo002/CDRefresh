@@ -26,29 +26,37 @@
                                 <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJe-bW-Z9R">
-                                <rect key="frame" x="63" y="28" width="32" height="30"/>
-                                <state key="normal" title="start"/>
-                                <connections>
-                                    <action selector="startRefresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1nV-IT-0o3"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGh-ya-QUS">
-                                <rect key="frame" x="283" y="28" width="31" height="30"/>
+                                <rect key="frame" x="236" y="21" width="77" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="VnL-ai-eF5"/>
+                                    <constraint firstAttribute="height" constant="53" id="hOn-Sp-eew"/>
+                                </constraints>
                                 <state key="normal" title="stop"/>
                                 <connections>
                                     <action selector="stopRefresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YVC-gN-njy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJe-bW-Z9R">
+                                <rect key="frame" x="44" y="21" width="83" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="htV-jS-RNh"/>
+                                    <constraint firstAttribute="width" constant="83" id="qle-Hc-gGF"/>
+                                </constraints>
+                                <state key="normal" title="start"/>
+                                <connections>
+                                    <action selector="startRefresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1nV-IT-0o3"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Vli-di-8As" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="AIt-Jc-sBd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nGh-ya-QUS" secondAttribute="trailing" constant="45" id="F9c-59-z3y"/>
-                            <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="nGh-ya-QUS" secondAttribute="bottom" constant="18" id="VYp-TW-jCk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nGh-ya-QUS" secondAttribute="trailing" constant="46" id="F9c-59-z3y"/>
+                            <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="nGh-ya-QUS" secondAttribute="bottom" constant="2" id="VYp-TW-jCk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vli-di-8As" secondAttribute="bottom" id="iSc-4l-7Kc"/>
-                            <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="oJe-bW-Z9R" secondAttribute="bottom" constant="18" id="lGW-Z2-c8Z"/>
-                            <constraint firstItem="oJe-bW-Z9R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="47" id="mUf-D1-qVQ"/>
+                            <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="oJe-bW-Z9R" secondAttribute="bottom" constant="2" id="lGW-Z2-c8Z"/>
+                            <constraint firstItem="oJe-bW-Z9R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="28" id="mUf-D1-qVQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vli-di-8As" secondAttribute="trailing" constant="-16" id="oYo-pY-IEs"/>
                             <constraint firstItem="Vli-di-8As" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="56" id="vpr-h9-r2l"/>
                         </constraints>

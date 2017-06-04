@@ -24,6 +24,13 @@
         NSLog(@"pulled");
     }];
     
+    [self.table addPullRefresh:^{
+        NSLog(@"pulled2");
+    } and:^(UIView *refView, CGFloat per) {
+        [refView setAlpha:pow(per, 4)];
+    }];
+    
+    
 }
 
 

@@ -13,8 +13,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var table: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        table.addPullRefresh {
-            print("hahhah")
+
+        
+//        table.addPullRefresh({
+//          print("refreshing")
+//        })
+//        
+
+        table.addPullRefresh({
+            print("refreshing")
+        }) { (refView, per) in
+            refView.alpha = pow(per, 4)
         }
     }
 

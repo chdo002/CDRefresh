@@ -27,8 +27,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P84-Fb-fQa">
-                                <rect key="frame" x="56" y="35" width="82" height="30"/>
+                                <rect key="frame" x="63" y="35" width="82" height="55"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Bko-cy-11z"/>
                                     <constraint firstAttribute="width" constant="82" id="h8m-WA-get"/>
                                 </constraints>
                                 <state key="normal" title="start"/>
@@ -37,9 +38,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbn-iA-WtL">
-                                <rect key="frame" x="241" y="35" width="64" height="30"/>
+                                <rect key="frame" x="238" y="34" width="92" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="41X-VF-5wr"/>
+                                    <constraint firstAttribute="width" constant="92" id="41X-VF-5wr"/>
+                                    <constraint firstAttribute="height" constant="55" id="vOX-9n-q1j"/>
                                 </constraints>
                                 <state key="normal" title="stop"/>
                                 <connections>
@@ -51,12 +53,12 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="5Gt-61-8Kz" secondAttribute="trailing" constant="-16" id="3dM-F4-5Qe"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5Gt-61-8Kz" secondAttribute="bottom" id="Fjs-um-G3Y"/>
-                            <constraint firstItem="5Gt-61-8Kz" firstAttribute="top" secondItem="P84-Fb-fQa" secondAttribute="bottom" constant="26" id="Iim-xr-TRN"/>
+                            <constraint firstItem="5Gt-61-8Kz" firstAttribute="top" secondItem="P84-Fb-fQa" secondAttribute="bottom" constant="1" id="Iim-xr-TRN"/>
                             <constraint firstItem="5Gt-61-8Kz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="71" id="MkS-SP-BFQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hbn-iA-WtL" secondAttribute="trailing" constant="54" id="Sr6-3o-rfl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hbn-iA-WtL" secondAttribute="trailing" constant="29" id="Sr6-3o-rfl"/>
                             <constraint firstItem="5Gt-61-8Kz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="h4c-Fr-Whu"/>
-                            <constraint firstItem="P84-Fb-fQa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="k9e-0A-71k"/>
-                            <constraint firstItem="5Gt-61-8Kz" firstAttribute="top" secondItem="hbn-iA-WtL" secondAttribute="bottom" constant="26" id="vib-d9-zyM"/>
+                            <constraint firstItem="P84-Fb-fQa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="47" id="k9e-0A-71k"/>
+                            <constraint firstItem="5Gt-61-8Kz" firstAttribute="top" secondItem="hbn-iA-WtL" secondAttribute="bottom" constant="2" id="vib-d9-zyM"/>
                         </constraints>
                     </view>
                     <connections>
