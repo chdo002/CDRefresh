@@ -8,23 +8,42 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var table: UITableView!
+    
+    var source: Int = 29 {
+        didSet{
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-//        table.addPullRefresh({
-//          print("refreshing")
-//        })
-//        
-
+        table.dataSource = self
+        
         table.addPullRefresh({
-            print("refreshing")
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: { 
+                self.source += 1
+                self.table.reloadData()
+                self.table.stopRefreshing()
+            })
+            
         }) { (refView, per) in
             refView.alpha = pow(per, 4)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return source
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: nil)
+        cell.textLabel?.text = "\(indexPath.row)"
+        return cell
     }
 
     override func didReceiveMemoryWarning() {

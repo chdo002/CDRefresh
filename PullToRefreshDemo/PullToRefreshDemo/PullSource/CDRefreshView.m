@@ -67,20 +67,42 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
 }
 
 -(void)setState:(CDRefreshState)state {
+    
     if (_state != state) {
         _state = state;
     } else {
         return;
     }
-    
     switch (state) {
         case CDRefreshStateNormal:
-            [self toogleIntoNoramlState];
+            // 进入普通模式
+        {
+            [UIView animateWithDuration:0.25 animations:^{
+                scroll.contentInset = originInset;
+                scroll.contentOffset = originOffset;
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
             break;
         case CDRefreshStatePulling:
             break;
         case CDRefreshStateRefreshing:
-            [self toogleIntoRefreshState];
+            // 进入刷新状态
+            [UIView animateWithDuration:0.25 animations:^{
+                [self setAlpha:1];
+                UIEdgeInsets inset = scroll.contentInset;
+                inset.top = pullMark + inset.top;
+                scroll.contentInset = inset;
+                CGPoint offset = scroll.contentOffset;
+                offset.y = -inset.top;
+                scroll.contentOffset = offset;
+            } completion:^(BOOL finished) {
+                if(self.refreshAction){
+                    self.refreshAction();
+                    [self startAnimation];
+                }
+            }];
             break;
     }
 }
@@ -120,8 +142,6 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
             if (-offset.y > pullMark) {
                 //触发刷新事件
                 self.state = CDRefreshStateRefreshing;
-            } else {
-                self.state = CDRefreshStateNormal;
             }
         }
     } else {
@@ -135,38 +155,20 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
 }
 
 -(void)stopRefreshing{
-    self.state = CDRefreshStateNormal;
     [self stopAnimation];
-}
-
--(void)toogleIntoNoramlState{
     
-    [UIView animateWithDuration:0.25 animations:^{
-        scroll.contentInset = originInset;
-        scroll.contentOffset = originOffset;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
+    if (scroll.contentOffset.y > pullMark) {
+        _state = CDRefreshStateNormal;
+        [UIView animateWithDuration:0.25 animations:^{
+            scroll.contentInset = originInset;
+            [self setAlpha:0];
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else {
+        self.state = CDRefreshStateNormal;
+    }
 }
-
--(void)toogleIntoRefreshState{
-    [UIView animateWithDuration:0.25 animations:^{
-        UIEdgeInsets inset = scroll.contentInset;
-        inset.top = pullMark + inset.top;
-        scroll.contentInset = inset;
-        
-        CGPoint offset = scroll.contentOffset;
-        offset.y = -inset.top;
-        scroll.contentOffset = offset;
-    } completion:^(BOOL finished) {
-        if(self.refreshAction){
-            self.refreshAction();
-            [self startAnimation];
-        }
-    }];
-}
-
 
 -(void)startAnimation{
     [loading startAnimating];

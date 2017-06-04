@@ -204,7 +204,7 @@
 				TargetAttributes = {
 					E9759A561EE26E690002F403 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 62N6ZZKK9A;
+						DevelopmentTeam = MTLATAGD8N;
 						ProvisioningStyle = Automatic;
 					};
 					E9759A6A1EE26E6A0002F403 = {
@@ -427,10 +427,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62N6ZZKK9A;
+				DEVELOPMENT_TEAM = MTLATAGD8N;
 				INFOPLIST_FILE = CDPullDemo_Swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "chdo.CDPullDemo-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "chdo.CDPullDemo-Swift.sj";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -440,10 +440,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62N6ZZKK9A;
+				DEVELOPMENT_TEAM = MTLATAGD8N;
 				INFOPLIST_FILE = CDPullDemo_Swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "chdo.CDPullDemo-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "chdo.CDPullDemo-Swift.sj";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -24,11 +24,11 @@
     
     _table.dataSource = self;
     
-    rowNumber = 1;
+    rowNumber = 16;
     
     [self.table addPullRefresh:^{
         NSLog(@"pulled");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             NSLog(@"trigged");
             rowNumber++;
             [self.table reloadData];

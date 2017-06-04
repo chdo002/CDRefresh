@@ -83,8 +83,18 @@ private class CDRefreshView: UIView {
             case .normal:
                 // 只有oldValue是refreshing或者pulling态才会进入此处
                 switch oldValue {
-                case .pulling(percent: _), .refreshing:
+                case .pulling(percent: _):
                     toogleIntoNoramlState()
+                case .refreshing:
+                    if (scroll?.contentOffset.y)! > pullMark {
+                        UIView.animate(withDuration: 0.25, animations: {
+                            self.scroll?.contentInset = self.originInset!
+                            self.alpha = 0
+                        }) { (bol) in
+                        }
+                    } else {
+                        toogleIntoNoramlState()
+                    }
                 default:
                     return
                 }
@@ -132,6 +142,8 @@ private class CDRefreshView: UIView {
     func stopRefresh() {
         self.state = .normal
         self.stopAnimation()
+        
+        
     }
     
     
@@ -192,8 +204,6 @@ private class CDRefreshView: UIView {
                     } else if scrollView.isDecelerating {
                         if -offset.y > pullMark {
                             state = .refreshing
-                        } else {
-                            state = .normal
                         }
                     }
                 }
