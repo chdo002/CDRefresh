@@ -225,7 +225,7 @@
 				TargetAttributes = {
 					E9759A101EE269CE0002F403 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = MTLATAGD8N;
+						DevelopmentTeam = 62N6ZZKK9A;
 						ProvisioningStyle = Automatic;
 					};
 					E9759A291EE269CE0002F403 = {
@@ -447,10 +447,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MTLATAGD8N;
+				DEVELOPMENT_TEAM = 62N6ZZKK9A;
 				INFOPLIST_FILE = PullToRefreshDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chdo.PullToRefreshDemo.sj;
+				PRODUCT_BUNDLE_IDENTIFIER = chdo.PullToRefreshDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -459,10 +459,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MTLATAGD8N;
+				DEVELOPMENT_TEAM = 62N6ZZKK9A;
 				INFOPLIST_FILE = PullToRefreshDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chdo.PullToRefreshDemo.sj;
+				PRODUCT_BUNDLE_IDENTIFIER = chdo.PullToRefreshDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -46,8 +46,6 @@
     return cell;
 }
 
-
-
 - (IBAction)startRefresh:(id)sender {
     [self.table startRefresh];
 }

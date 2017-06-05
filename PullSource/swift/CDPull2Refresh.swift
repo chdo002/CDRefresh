@@ -73,6 +73,13 @@ private class CDRefreshView: UIView {
         
         didSet{
             switch state {
+            case .normal:
+                // 只有oldValue是refreshing或者pulling态才会进入此处
+                self.alpha = 0
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.scroll?.contentInset = self.originInset!
+                }) { (bol) in
+                }
             case .pulling(percent: let per):
                 // 只有oldValue是normal或者pulling态才会进入此处
                 if let handler = self.pullingHandler {
@@ -80,24 +87,6 @@ private class CDRefreshView: UIView {
                 } else {
                     self.alpha = pow(per, 2.5) // 非线性的透明度变化好看一点
                 }
-            case .normal:
-                // 只有oldValue是refreshing或者pulling态才会进入此处
-//                switch oldValue {
-//                case .pulling(percent: _):
-//                    toogleIntoNoramlState()
-//                case .refreshing:
-                    if (scroll?.contentOffset.y)! > pullMark {
-                        UIView.animate(withDuration: 0.25, animations: {
-                            self.scroll?.contentInset = self.originInset!
-                            self.alpha = 0
-                        }) { (bol) in
-                        }
-                    } else {
-                        toogleIntoNoramlState()
-                    }
-//                default:
-//                    return
-//                }
             case .refreshing:
                 // 只有oldValue是normal或者pulling态才会进入此处
                 switch oldValue {
@@ -123,7 +112,6 @@ private class CDRefreshView: UIView {
         addSubview(loading)
         
     }
-    
     
     var obsesrver:Int8 = 1
     override func didMoveToSuperview() {

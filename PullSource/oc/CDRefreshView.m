@@ -73,13 +73,14 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
     } else {
         return;
     }
+    
     switch (state) {
         case CDRefreshStateNormal:
             // 进入普通模式
         {
+            [self setAlpha:0];
             [UIView animateWithDuration:0.25 animations:^{
                 scroll.contentInset = originInset;
-                scroll.contentOffset = originOffset;
             } completion:^(BOOL finished) {
                 
             }];
@@ -156,18 +157,7 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
 
 -(void)stopRefreshing{
     [self stopAnimation];
-    
-    if (scroll.contentOffset.y > pullMark) {
-        _state = CDRefreshStateNormal;
-        [UIView animateWithDuration:0.25 animations:^{
-            scroll.contentInset = originInset;
-            [self setAlpha:0];
-        } completion:^(BOOL finished) {
-            
-        }];
-    } else {
-        self.state = CDRefreshStateNormal;
-    }
+    self.state = CDRefreshStateNormal;
 }
 
 -(void)startAnimation{
