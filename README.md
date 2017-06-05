@@ -6,4 +6,4 @@ a very simple Pull2Refresh
 
 - [x] pulling loading animation
 
-- [] pulling gif
+- [ ] pulling gif
