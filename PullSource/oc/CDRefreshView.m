@@ -87,13 +87,17 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
         }
             break;
         case CDRefreshStatePulling:
+            
             break;
         case CDRefreshStateRefreshing:
+            
+            [self setAlpha:1];
+            
             // 进入刷新状态
             [UIView animateWithDuration:0.25 animations:^{
-                [self setAlpha:1];
+                
                 UIEdgeInsets inset = scroll.contentInset;
-                inset.top = pullMark + inset.top;
+                inset.top = self.frame.size.height + inset.top;
                 scroll.contentInset = inset;
                 CGPoint offset = scroll.contentOffset;
                 offset.y = -inset.top;
@@ -116,6 +120,7 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
     originOffset = scroll.contentOffset;
     
     [scroll addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew  context:CDRefreshViewContext];
+    [scroll addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld   context:CDRefreshViewContext];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -132,7 +137,7 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
         if (scroll.isDragging) {
             self.state = CDRefreshStatePulling;
         
-            CGFloat per = scroll.contentOffset.y / pullMark;
+            CGFloat per = (scroll.contentOffset.y + originInset.top) / self.frame.size.height;
             per = MIN(per, 0);
             per = MAX(per, -1);
             
@@ -145,6 +150,23 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
                 self.state = CDRefreshStateRefreshing;
             }
         }
+    } else if ([keyPath isEqualToString:@"contentInset"] && context == CDRefreshViewContext) {
+        
+        
+        UIEdgeInsets oldoffset = [change[NSKeyValueChangeOldKey] UIEdgeInsetsValue];
+        UIEdgeInsets newInset = [change[NSKeyValueChangeNewKey] UIEdgeInsetsValue];
+            
+        if (oldoffset.top == 0 && pullMark < newInset.top){
+        
+            originInset = newInset;
+            
+            CGRect oldFrame = self.frame;
+            CGRect newFrame = CGRectMake(oldFrame.origin.x, oldFrame.origin.y - newInset.top, oldFrame.size.width, oldFrame.size.height);
+            self.frame = newFrame;
+            
+            pullMark = pullMark + newInset.top;
+        }
+        
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
