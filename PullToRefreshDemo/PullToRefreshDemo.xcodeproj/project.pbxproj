@@ -225,7 +225,7 @@
 				TargetAttributes = {
 					E9759A101EE269CE0002F403 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 62N6ZZKK9A;
+						DevelopmentTeam = 56W7P8272X;
 						ProvisioningStyle = Automatic;
 					};
 					E9759A291EE269CE0002F403 = {
@@ -447,8 +447,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62N6ZZKK9A;
+				DEVELOPMENT_TEAM = 56W7P8272X;
 				INFOPLIST_FILE = PullToRefreshDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chdo.PullToRefreshDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -459,8 +460,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62N6ZZKK9A;
+				DEVELOPMENT_TEAM = 56W7P8272X;
 				INFOPLIST_FILE = PullToRefreshDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chdo.PullToRefreshDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
