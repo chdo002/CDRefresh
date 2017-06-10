@@ -156,7 +156,7 @@ static void *CDRefreshViewContext = &CDRefreshViewContext;
         UIEdgeInsets oldoffset = [change[NSKeyValueChangeOldKey] UIEdgeInsetsValue];
         UIEdgeInsets newInset = [change[NSKeyValueChangeNewKey] UIEdgeInsetsValue];
             
-        if (oldoffset.top == 0 && pullMark < newInset.top){
+        if (oldoffset.top == 0 && pullMark < newInset.top) {
         
             originInset = newInset;
             

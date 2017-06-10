@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITableViewDataSource {
             refView.alpha = pow(per, 4)
         }
         table.backgroundColor = UIColor.brown
-        table.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+//        table.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

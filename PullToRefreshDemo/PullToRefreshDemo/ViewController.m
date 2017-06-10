@@ -37,7 +37,7 @@
     }];
     
     
-    [self.table setContentInset:UIEdgeInsetsMake(200, 0, 0, 0)];
+//    [self.table setContentInset:UIEdgeInsetsMake(200, 0, 0, 0)];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

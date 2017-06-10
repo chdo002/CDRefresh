@@ -88,7 +88,7 @@ private class CDRefreshView: UIView {
     /****************************************/
     
     weak var scroll: UIScrollView?
-    let pullMark: CGFloat = 60
+    var pullMark: CGFloat = 60
     
     var originInset: UIEdgeInsets?
 
@@ -181,7 +181,7 @@ private class CDRefreshView: UIView {
             
             if var inset = self.scroll?.contentInset {
                 
-                inset.top = self.pullMark + inset.top
+                inset.top = self.pullMark
                 
                 self.scroll?.contentInset = inset
                 
@@ -214,6 +214,7 @@ private class CDRefreshView: UIView {
             switch state {
                 
             case .normal , .pulling(percent: _):
+                
                 if  let offset = change?[.newKey] as? CGPoint,
                     let scrollView = self.scroll
                 {
@@ -225,35 +226,30 @@ private class CDRefreshView: UIView {
                         state = .pulling(percent: -per)
                         
                     } else if scrollView.isDecelerating {
+                        
                         if -offset.y > pullMark {
                             state = .refreshing
                         }
                     }
                 }
+                
             default:
                 return
             }
             
         } else if keyPath == "contentInset" && context == &obsesrver {
             
-            if let inset = change?[.newKey] as? UIEdgeInsets {
-                
-                if self.scroll!.isDragging { return }
-                
-                if self.scroll!.isDecelerating { return }
-                
-                if self.state.isRefreshing() { return }
             
-                self.originInset = inset
-                
-                if let oldInset = change?[.oldKey] as? UIEdgeInsets {
-                    if oldInset.top == 0 {
-                        var oldFrame = self.frame
-                        oldFrame.origin.y = oldFrame.origin.y - inset.top
-                        self.frame = oldFrame
-                    }
+            if let old = change?[.oldKey] as? UIEdgeInsets, let new = change?[.newKey] as? UIEdgeInsets {
+                if old.top == 0 && new.top != 0 && self.state.isNormal(){
+                    self.originInset = new
+                    
+                    self.pullMark += new.top
+                    self.frame.origin.y -= new.top
+                    
                 }
             }
+            
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
