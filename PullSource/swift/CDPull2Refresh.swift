@@ -47,21 +47,51 @@ private class CDRefreshView: UIView {
     
     let screenW = UIScreen.main.bounds.width
     let screenH = UIScreen.main.bounds.height
-    
 
-    enum CDRefreshState {
+    let minAlpha: CGFloat = 0
+    let maxAlpha: CGFloat = 1
+
+    enum CDRefreshState{
         case normal
         case pulling(percent: CGFloat)
         case refreshing
+        
+        func isNormal() -> Bool {
+            switch self {
+            case .normal:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        func isPulling() -> Bool{
+            switch self {
+            case .pulling(percent: _):
+                return true
+            default:
+                return false
+            }
+        }
+        
+        func isRefreshing() -> Bool{
+            switch self {
+            case .refreshing:
+                return true
+            default:
+                return false
+            }
+        }
     }
     
     
     /****************************************/
     
     weak var scroll: UIScrollView?
-    let pullMark: CGFloat = 60;
+    let pullMark: CGFloat = 60
     
     var originInset: UIEdgeInsets?
+
     var originOffset: CGPoint?
     
     lazy var loading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -75,7 +105,7 @@ private class CDRefreshView: UIView {
             switch state {
             case .normal:
                 // 只有oldValue是refreshing或者pulling态才会进入此处
-                self.alpha = 0
+                self.alpha = minAlpha
                 UIView.animate(withDuration: 0.25, animations: {
                     self.scroll?.contentInset = self.originInset!
                 }) { (bol) in
@@ -85,7 +115,7 @@ private class CDRefreshView: UIView {
                 if let handler = self.pullingHandler {
                     handler(self, per)
                 } else {
-                    self.alpha = pow(per, 2.5) // 非线性的透明度变化好看一点
+                    self.alpha = minAlpha + pow(per, 2.5) // 非线性的透明度变化好看一点
                 }
             case .refreshing:
                 // 只有oldValue是normal或者pulling态才会进入此处
@@ -105,12 +135,11 @@ private class CDRefreshView: UIView {
         let rect = CGRect(x: 0, y: -pullMark, width: screenW, height: pullMark)
         super.init(frame: rect)
     
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.cyan
 
         loading.hidesWhenStopped = false
         loading.frame = self.bounds
         addSubview(loading)
-        
     }
     
     var obsesrver:Int8 = 1
@@ -121,6 +150,7 @@ private class CDRefreshView: UIView {
         originOffset = scroll?.contentOffset
         
         scroll?.addObserver(self, forKeyPath: "contentOffset", options: .new, context: &obsesrver)
+        scroll?.addObserver(self, forKeyPath: "contentInset", options: [.initial, .old, .new, .prior], context: &obsesrver)
     }
     
     func startRefresh() {
@@ -137,7 +167,7 @@ private class CDRefreshView: UIView {
         UIView.animate(withDuration: 0.25, animations: { 
             self.scroll?.contentInset = self.originInset!
             self.scroll?.contentOffset = self.originOffset!
-            self.alpha = 0
+            self.alpha = self.minAlpha
         }) { (bol) in
             if bol {
                 
@@ -146,9 +176,13 @@ private class CDRefreshView: UIView {
     }
     
     func toogleIntoRefreshState() {
-        UIView.animate(withDuration: 0.25, animations: { 
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            
             if var inset = self.scroll?.contentInset {
+                
                 inset.top = self.pullMark + inset.top
+                
                 self.scroll?.contentInset = inset
                 
                 if var offSet = self.scroll?.contentOffset {
@@ -156,7 +190,8 @@ private class CDRefreshView: UIView {
                     self.scroll?.contentOffset = offSet
                 }
             }
-            self.alpha = 1
+            self.alpha = self.maxAlpha
+            
         }) { (bol) in
             if bol {
                 self.refreshAction?()
@@ -177,16 +212,18 @@ private class CDRefreshView: UIView {
         
         if keyPath == "contentOffset" && context == &obsesrver {
             switch state {
+                
             case .normal , .pulling(percent: _):
                 if  let offset = change?[.newKey] as? CGPoint,
                     let scrollView = self.scroll
                 {
                     if scrollView.isDragging {
                         
-                        var per: CGFloat =  scrollView.contentOffset.y / pullMark
+                        var per: CGFloat = scrollView.contentOffset.y / pullMark
                         per = min(per, 0)
                         per = max(per, -1)
                         state = .pulling(percent: -per)
+                        
                     } else if scrollView.isDecelerating {
                         if -offset.y > pullMark {
                             state = .refreshing
@@ -195,6 +232,27 @@ private class CDRefreshView: UIView {
                 }
             default:
                 return
+            }
+            
+        } else if keyPath == "contentInset" && context == &obsesrver {
+            
+            if let inset = change?[.newKey] as? UIEdgeInsets {
+                
+                if self.scroll!.isDragging { return }
+                
+                if self.scroll!.isDecelerating { return }
+                
+                if self.state.isRefreshing() { return }
+            
+                self.originInset = inset
+                
+                if let oldInset = change?[.oldKey] as? UIEdgeInsets {
+                    if oldInset.top == 0 {
+                        var oldFrame = self.frame
+                        oldFrame.origin.y = oldFrame.origin.y - inset.top
+                        self.frame = oldFrame
+                    }
+                }
             }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
