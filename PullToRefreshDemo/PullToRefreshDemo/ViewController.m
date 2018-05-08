@@ -30,7 +30,7 @@
         NSLog(@"pulled");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             NSLog(@"trigged");
-            rowNumber++;
+            self->rowNumber++;
             [self.table reloadData];
             [self.table stopRefreshing];
         });

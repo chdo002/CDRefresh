@@ -10,6 +10,12 @@
 #import "CDRefreshView.h"
 #import "objc/runtime.h"
 
+typedef enum : NSUInteger {
+    AATRefreshTypeLoading,
+    AATRefreshTypeText,
+    AATRefreshTypeGIF,
+} AATRefreshType;
+
 @implementation UIScrollView (CDPullRefresh)
 
 static NSString *refreshKey = @"refreshKey";
@@ -26,28 +32,18 @@ static NSString *refreshKey = @"refreshKey";
     [refresh stopRefreshing];
 }
 
--(void)addPullRefresh:(void (^)())refreshAction {
-    
-    CDRefreshView *refresh = objc_getAssociatedObject(self, &refreshKey);
-    if(!refresh){
-        refresh = [[CDRefreshView alloc] init];
-        [self addSubview:refresh];
-    }
-    
-    [refresh setRefreshAction:refreshAction];
-
-    objc_setAssociatedObject(self, &refreshKey, refresh, OBJC_ASSOCIATION_ASSIGN);
-    
+-(void)addPullRefresh:(void (^)(void))refreshAction {
+    [self addPullRefresh:refreshAction progressHandler:nil];
 }
 
--(void)addPullRefresh:(void (^)())refreshAction progressHandler: (void (^)(UIView *refView, CGFloat per))pullingAction {
+-(void)addPullRefresh:(void (^)(void))refreshAction progressHandler: (void (^)(UIView *refView, CGFloat per))pullingAction {
     
     CDRefreshView *refresh = objc_getAssociatedObject(self, &refreshKey);
     if(!refresh){
         refresh = [[CDRefreshView alloc] init];
         [self addSubview:refresh];
     }
-
+    
     [refresh setRefreshAction:refreshAction];
     [refresh setPullAction:pullingAction];
     
